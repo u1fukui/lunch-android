@@ -1,20 +1,15 @@
 package com.u1fukui.lunch.app.activity;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
-import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
-import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
 import com.u1fukui.lunch.app.R;
-import com.u1fukui.lunch.app.adapter.RestaurantListAdapter;
+import com.u1fukui.lunch.app.fragment.RestaurantListMapFragment;
 import com.u1fukui.lunch.app.fragment.RestaurantListFragment;
 
 public class MainActivity extends FragmentActivity {
@@ -37,7 +32,7 @@ public class MainActivity extends FragmentActivity {
     Button button2 = new Button(this);
     button2.setText("地図");
     tabSpec2.setIndicator(button2);
-    host.addTab(tabSpec2, RestaurantListFragment.class, null);
+    host.addTab(tabSpec2, RestaurantListMapFragment.class, null);
   }
 
   @Override

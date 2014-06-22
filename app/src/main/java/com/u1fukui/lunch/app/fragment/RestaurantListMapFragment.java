@@ -6,16 +6,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.u1fukui.lunch.app.R;
+import com.u1fukui.lunch.app.SLApplication;
+import com.u1fukui.lunch.app.model.SLRestaurant;
+
+import java.util.List;
 
 /**
  * Created by u1 on 2014/05/25.
  */
 public class RestaurantListMapFragment extends Fragment {
 
-  private GoogleMap map;
+  private GoogleMap mMap;
   private SupportMapFragment mMapFragment;
 
   @Override
@@ -23,7 +31,14 @@ public class RestaurantListMapFragment extends Fragment {
     View rootView = inflater.inflate(R.layout.fragment_restaurant_list_map, container, false);
 
     mMapFragment = (SupportMapFragment)getActivity().getSupportFragmentManager().findFragmentById(R.id.map);
-    map = mMapFragment.getMap();
+    mMap = mMapFragment.getMap();
+
+    CameraUpdate camera =
+        CameraUpdateFactory.newLatLngZoom(
+            new LatLng(35.658517, 139.701334), 16);
+    mMap.moveCamera(camera);
+
+    setRestaurantList();
 
     return rootView;
   }
@@ -32,10 +47,20 @@ public class RestaurantListMapFragment extends Fragment {
   public void onDestroyView() {
     //TODO: Auto-generated method stub
     super.onDestroyView();
-    if (map != null) {
+    if (mMap != null) {
       getActivity().getSupportFragmentManager().beginTransaction()
           .remove(mMapFragment).commit();
-      map = null;
+      mMap = null;
+    }
+  }
+
+  private void setRestaurantList() {
+    List<SLRestaurant> restaurantList = SLApplication.getInstance().getRestaurantList();
+    for (SLRestaurant restaurant : restaurantList) {
+      MarkerOptions marker = new MarkerOptions();
+      marker.title(restaurant.name);
+      marker.position(new LatLng(restaurant.lat, restaurant.lng));
+      mMap.addMarker(marker);
     }
   }
 

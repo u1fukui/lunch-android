@@ -7,6 +7,10 @@ import java.io.Serializable;
  */
 public class SLRestaurant implements Serializable {
 
+  public static final String EXTRA_RESTAURANT = "extra_restaurant";
+
+  private static final long serialVersionUID = -4895372963022040756L;
+
   /** 識別ID */
   public String id;
 
@@ -37,6 +41,9 @@ public class SLRestaurant implements Serializable {
   /** サムネイル画像のファイル名 */
   public String thumbnailName;
 
+  /** サムネイル画像の数 */
+  public int thumbnailCount;
+
   /** 緯度 */
   public double lat;
 
@@ -45,4 +52,10 @@ public class SLRestaurant implements Serializable {
 
   /** 現在地からの距離 */
   public double distance;
+
+  /** ランチタイムの時間帯を取得 */
+  public String getLunchTimeString() {
+    return startLunchTime + "〜" + finishLunchTime;
+  }
+
 }

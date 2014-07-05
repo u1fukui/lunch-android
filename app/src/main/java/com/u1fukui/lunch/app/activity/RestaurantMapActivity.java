@@ -24,6 +24,7 @@ public class RestaurantMapActivity extends FragmentActivity {
 
     SupportMapFragment mapFragment = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.restaurant_map);
     GoogleMap map = mapFragment.getMap();
+    map.setMyLocationEnabled(true);
 
     mRestaurant = (SLRestaurant) getIntent().getSerializableExtra(SLRestaurant.EXTRA_RESTAURANT);
     LatLng restaurantPosition = new LatLng(mRestaurant.lat, mRestaurant.lng);

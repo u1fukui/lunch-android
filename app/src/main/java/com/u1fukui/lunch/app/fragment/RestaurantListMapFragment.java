@@ -18,9 +18,6 @@ import com.u1fukui.lunch.app.model.SLRestaurant;
 
 import java.util.List;
 
-/**
- * Created by u1 on 2014/05/25.
- */
 public class RestaurantListMapFragment extends Fragment {
 
   private GoogleMap mMap;
@@ -32,6 +29,7 @@ public class RestaurantListMapFragment extends Fragment {
 
     mMapFragment = (SupportMapFragment)getActivity().getSupportFragmentManager().findFragmentById(R.id.map);
     mMap = mMapFragment.getMap();
+    mMap.setMyLocationEnabled(true);
 
     CameraUpdate camera =
         CameraUpdateFactory.newLatLngZoom(

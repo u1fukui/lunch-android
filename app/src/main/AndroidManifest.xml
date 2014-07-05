@@ -49,6 +49,10 @@
     <activity
       android:name=".activity.RestaurantMapActivity"
       android:screenOrientation="portrait" />
+
+    <activity
+      android:name=".activity.TabelogActivity"
+      android:screenOrientation="portrait" />
   </application>
 
 </manifest>

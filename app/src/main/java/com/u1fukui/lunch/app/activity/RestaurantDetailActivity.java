@@ -1,11 +1,9 @@
 package com.u1fukui.lunch.app.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 
@@ -58,6 +56,16 @@ public class RestaurantDetailActivity extends FragmentActivity {
         Intent intent = new Intent(RestaurantDetailActivity.this,
             RestaurantMapActivity.class);
         intent.putExtra(SLRestaurant.EXTRA_RESTAURANT, restaurant);
+        startActivity(intent);
+      }
+    });
+
+    mTabelogButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = new Intent(RestaurantDetailActivity.this,
+            TabelogActivity.class);
+        intent.putExtra(TabelogActivity.EXTRA_URL, restaurant.tabelogUrl);
         startActivity(intent);
       }
     });

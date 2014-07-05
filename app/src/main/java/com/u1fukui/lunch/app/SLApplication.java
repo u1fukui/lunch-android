@@ -71,6 +71,7 @@ public class SLApplication extends Application {
           r.tabelogUrl = array[9];
           r.comment = array[10];
           r.thumbnailName = array[11];
+          r.thumbnailCount = Integer.parseInt(array[12]);
           list.add(r);
         }
       } catch (IOException ex) {

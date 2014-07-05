@@ -1,35 +1,45 @@
 package com.u1fukui.lunch.app.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.Button;
 
 import com.u1fukui.lunch.app.R;
+import com.u1fukui.lunch.app.adapter.PhotoPagerAdapter;
 import com.u1fukui.lunch.app.model.SLRestaurant;
 import com.u1fukui.lunch.app.view.RestaurantDetailItem;
 
 public class RestaurantDetailActivity extends FragmentActivity {
 
+  private ViewPager mPager;
   private RestaurantDetailItem mAddressItem;
   private RestaurantDetailItem mTimeItem;
   private RestaurantDetailItem mHolidayItem;
   private RestaurantDetailItem mMenuItem;
   private RestaurantDetailItem mCommentItem;
+  private Button mTabelogButton;
+  private Button mMapButton;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_restaurant_detail);
 
+    mPager = (ViewPager) findViewById(R.id.detail_pager);
     mAddressItem = (RestaurantDetailItem) findViewById(R.id.detail_address);
     mTimeItem = (RestaurantDetailItem) findViewById(R.id.detail_time);
     mHolidayItem = (RestaurantDetailItem) findViewById(R.id.detail_holiday);
     mMenuItem = (RestaurantDetailItem) findViewById(R.id.detail_menu);
     mCommentItem = (RestaurantDetailItem) findViewById(R.id.detail_comment);
+    mTabelogButton = (Button) findViewById(R.id.detail_tabelog_button);
+    mMapButton = (Button) findViewById(R.id.detail_map_button);
 
-    SLRestaurant restaurant = (SLRestaurant) getIntent()
+    final SLRestaurant restaurant = (SLRestaurant) getIntent()
         .getSerializableExtra(SLRestaurant.EXTRA_RESTAURANT);
 
     mAddressItem.setItem("住所", restaurant.address);
@@ -37,5 +47,19 @@ public class RestaurantDetailActivity extends FragmentActivity {
     mHolidayItem.setItem("定休日", restaurant.holiday);
     mMenuItem.setItem("メニュー", restaurant.featuredMenu);
     mCommentItem.setItem("補足", restaurant.comment);
+
+    PhotoPagerAdapter adapter = new PhotoPagerAdapter(this,
+        restaurant.thumbnailName, restaurant.thumbnailCount);
+    mPager.setAdapter(adapter);
+
+    mMapButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = new Intent(RestaurantDetailActivity.this,
+            RestaurantMapActivity.class);
+        intent.putExtra(SLRestaurant.EXTRA_RESTAURANT, restaurant);
+        startActivity(intent);
+      }
+    });
   }
 }

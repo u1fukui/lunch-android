@@ -40,6 +40,10 @@
     <activity
       android:name=".activity.RestaurantDetailActivity"
       android:screenOrientation="portrait" />
+
+    <activity
+      android:name=".activity.RestaurantMapActivity"
+      android:screenOrientation="portrait" />
   </application>
 
 </manifest>

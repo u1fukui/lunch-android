@@ -3,13 +3,53 @@
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
-  android:layout_height="100dp">
+  android:layout_height="100dp"
+  android:background="#ffffff">
+
+  <ImageView
+    android:id="@+id/restaurant_thumbnail"
+    android:layout_width="100dp"
+    android:layout_height="100dp" />
 
   <TextView
+    style="@style/RestaurantListItemText"
     android:id="@+id/restaurant_name"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="20dp"
-    android:layout_centerVertical="true" />
+    android:layout_toRightOf="@id/restaurant_thumbnail"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="10dp"
+    android:textStyle="bold" />
+
+  <TextView
+    style="@style/RestaurantListItemText"
+    android:id="@+id/restaurant_time"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignLeft="@+id/restaurant_name"
+    android:layout_alignRight="@+id/restaurant_name"
+    android:layout_below="@+id/restaurant_name"
+    android:layout_marginTop="5dp" />
+
+  <TextView
+    style="@style/RestaurantListItemText"
+    android:id="@+id/restaurant_holiday"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignLeft="@+id/restaurant_name"
+    android:layout_alignRight="@+id/restaurant_name"
+    android:layout_below="@+id/restaurant_time"
+    android:layout_marginTop="4dp" />
+
+  <TextView
+    style="@style/RestaurantListItemText"
+    android:id="@+id/restaurant_menu"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignLeft="@+id/restaurant_name"
+    android:layout_alignRight="@+id/restaurant_name"
+    android:layout_below="@+id/restaurant_holiday"
+    android:layout_marginTop="4dp" />
 
 </RelativeLayout>

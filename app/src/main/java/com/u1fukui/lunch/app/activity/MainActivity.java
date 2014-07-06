@@ -12,7 +12,7 @@ import com.u1fukui.lunch.app.R;
 import com.u1fukui.lunch.app.fragment.RestaurantListMapFragment;
 import com.u1fukui.lunch.app.fragment.RestaurantListFragment;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends BaseActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +25,16 @@ public class MainActivity extends FragmentActivity {
     TabSpec tabSpec1 = host.newTabSpec("tab1");
     Button button1 = new Button(this);
     button1.setText("お店リスト");
+    button1.setTextColor(getResources().getColor(R.color.theme_color));
+    button1.setBackgroundResource(0);
     tabSpec1.setIndicator(button1);
     host.addTab(tabSpec1, RestaurantListFragment.class, null);
 
     TabSpec tabSpec2 = host.newTabSpec("tab2");
     Button button2 = new Button(this);
     button2.setText("地図");
+    button2.setTextColor(getResources().getColor(R.color.theme_color));
+    button2.setBackgroundResource(0);
     tabSpec2.setIndicator(button2);
     host.addTab(tabSpec2, RestaurantListMapFragment.class, null);
   }

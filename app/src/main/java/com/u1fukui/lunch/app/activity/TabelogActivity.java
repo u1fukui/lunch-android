@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 
 import com.u1fukui.lunch.app.R;
 
-public class TabelogActivity extends FragmentActivity {
+public class TabelogActivity extends BaseActivity {
 
   public static final String EXTRA_URL = "tabelog_url";
 

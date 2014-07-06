@@ -12,7 +12,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.u1fukui.lunch.app.R;
 import com.u1fukui.lunch.app.model.SLRestaurant;
 
-public class RestaurantMapActivity extends FragmentActivity {
+public class RestaurantMapActivity extends BaseActivity {
 
   private SupportMapFragment mMapFragment;
   private SLRestaurant mRestaurant;

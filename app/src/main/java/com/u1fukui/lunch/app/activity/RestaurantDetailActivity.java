@@ -12,7 +12,7 @@ import com.u1fukui.lunch.app.adapter.PhotoPagerAdapter;
 import com.u1fukui.lunch.app.model.SLRestaurant;
 import com.u1fukui.lunch.app.view.RestaurantDetailItem;
 
-public class RestaurantDetailActivity extends FragmentActivity {
+public class RestaurantDetailActivity extends BaseActivity {
 
   private ViewPager mPager;
   private RestaurantDetailItem mAddressItem;

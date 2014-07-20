@@ -14,6 +14,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.u1fukui.lunch.app.R;
 import com.u1fukui.lunch.app.SLApplication;
+import com.u1fukui.lunch.app.SLRestaurantManager;
 import com.u1fukui.lunch.app.model.SLRestaurant;
 
 import java.util.List;
@@ -43,7 +44,6 @@ public class RestaurantListMapFragment extends Fragment {
 
   @Override
   public void onDestroyView() {
-    //TODO: Auto-generated method stub
     super.onDestroyView();
     if (mMap != null) {
       getActivity().getSupportFragmentManager().beginTransaction()
@@ -53,7 +53,7 @@ public class RestaurantListMapFragment extends Fragment {
   }
 
   private void setRestaurantList() {
-    List<SLRestaurant> restaurantList = SLApplication.getInstance().getRestaurantList();
+    List<SLRestaurant> restaurantList = SLRestaurantManager.getInstance().getFilteredRestaurantArray();
     for (SLRestaurant restaurant : restaurantList) {
       MarkerOptions marker = new MarkerOptions();
       marker.title(restaurant.name);

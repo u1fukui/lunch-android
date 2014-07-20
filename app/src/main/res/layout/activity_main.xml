@@ -4,6 +4,16 @@
   android:layout_height="match_parent"
   android:orientation="vertical">
 
+  <TextView
+    android:id="@+id/main_filter_description"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:gravity="center"
+    android:text="すべてのお店を表示"
+    android:textSize="14dp"
+    android:textColor="#ffffff"
+    android:background="#333333" />
+
   <android.support.v4.app.FragmentTabHost
     android:id="@android:id/tabhost"
     xmlns:android="http://schemas.android.com/apk/res/android"

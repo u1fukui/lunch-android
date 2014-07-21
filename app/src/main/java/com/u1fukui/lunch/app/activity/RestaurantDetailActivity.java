@@ -1,8 +1,10 @@
 package com.u1fukui.lunch.app.activity;
 
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.view.Display;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -36,19 +38,17 @@ public class RestaurantDetailActivity extends BaseActivity {
     mTabelogButton = (ImageButton) findViewById(R.id.detail_tabelog_button);
     mMapButton = (ImageButton) findViewById(R.id.detail_map_button);
 
+    setViewPagerHeight(mPager);
+
+    // お店情報をセット
     final SLRestaurant restaurant = (SLRestaurant) getIntent()
         .getSerializableExtra(SLRestaurant.EXTRA_RESTAURANT);
-
-    mAddressItem.setItem("住所", restaurant.address);
-    mTimeItem.setItem("ランチ\nタイム", restaurant.getLunchTimeString());
-    mHolidayItem.setItem("定休日", restaurant.holiday);
-    mMenuItem.setItem("メニュー", restaurant.featuredMenu);
-    mCommentItem.setItem("補足", restaurant.comment);
-
+    showRestaurant(restaurant);
     PhotoPagerAdapter adapter = new PhotoPagerAdapter(this,
         restaurant.thumbnailName, restaurant.thumbnailCount);
     mPager.setAdapter(adapter);
 
+    // 地図ボタン
     mMapButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -59,6 +59,7 @@ public class RestaurantDetailActivity extends BaseActivity {
       }
     });
 
+    // 食べログボタン
     mTabelogButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -69,4 +70,20 @@ public class RestaurantDetailActivity extends BaseActivity {
       }
     });
   }
+
+  private void setViewPagerHeight(ViewPager pager) {
+    Display display = getWindowManager().getDefaultDisplay();
+    Point size = new Point();
+    display.getSize(size);
+    pager.getLayoutParams().height = size.x * 3 / 4;
+  }
+
+  private void showRestaurant(SLRestaurant restaurant) {
+    mAddressItem.setItem("住所", restaurant.address);
+    mTimeItem.setItem("ランチ\nタイム", restaurant.getLunchTimeString());
+    mHolidayItem.setItem("定休日", restaurant.holiday);
+    mMenuItem.setItem("メニュー", restaurant.featuredMenu);
+    mCommentItem.setItem("補足", restaurant.comment);
+  }
+
 }

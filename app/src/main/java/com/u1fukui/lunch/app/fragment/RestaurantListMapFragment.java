@@ -12,6 +12,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.u1fukui.lunch.app.R;
 import com.u1fukui.lunch.app.SLRestaurantManager;
@@ -25,6 +26,8 @@ public class RestaurantListMapFragment extends Fragment {
   private GoogleMap mMap;
   private SupportMapFragment mMapFragment;
   private ViewPager mViewPager;
+
+  private List<SLRestaurant> mRestaurantList;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,9 +43,20 @@ public class RestaurantListMapFragment extends Fragment {
         CameraUpdateFactory.newLatLngZoom(
             new LatLng(35.658517, 139.701334), 16);
     mMap.moveCamera(camera);
+    mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+      @Override
+      public boolean onMarkerClick(Marker marker) {
+        int pos = findPositionByName(marker.getTitle());
+        if (pos >= 0) {
+          mViewPager.setCurrentItem(pos, false);
+        }
+        return false;
+      }
+    });
 
     // データセット
-    setRestaurantList(SLRestaurantManager.getInstance().getFilteredRestaurantArray());
+    mRestaurantList = SLRestaurantManager.getInstance().getFilteredRestaurantArray();
+    setRestaurantList(mRestaurantList);
 
     return rootView;
   }
@@ -69,4 +83,14 @@ public class RestaurantListMapFragment extends Fragment {
     mViewPager.setAdapter(new RestaurantPagerAdapter(getActivity(), restaurantList));
   }
 
+  private int findPositionByName(String name) {
+    int size = mRestaurantList.size();
+    for (int i = 0; i < size; i++) {
+      SLRestaurant r = mRestaurantList.get(i);
+      if (r.name.equals(name)) {
+        return i;
+      }
+    }
+    return -1;
+  }
 }

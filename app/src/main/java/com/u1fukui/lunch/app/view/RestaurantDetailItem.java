@@ -33,5 +33,4 @@ public class RestaurantDetailItem extends RelativeLayout {
     mTitleView.setText(title);
     mDescriptionView.setText(description);
   }
-
 }

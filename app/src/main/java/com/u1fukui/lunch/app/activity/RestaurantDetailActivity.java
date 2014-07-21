@@ -2,10 +2,9 @@ package com.u1fukui.lunch.app.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.u1fukui.lunch.app.R;
 import com.u1fukui.lunch.app.adapter.PhotoPagerAdapter;
@@ -20,8 +19,8 @@ public class RestaurantDetailActivity extends BaseActivity {
   private RestaurantDetailItem mHolidayItem;
   private RestaurantDetailItem mMenuItem;
   private RestaurantDetailItem mCommentItem;
-  private Button mTabelogButton;
-  private Button mMapButton;
+  private ImageButton mTabelogButton;
+  private ImageButton mMapButton;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +33,8 @@ public class RestaurantDetailActivity extends BaseActivity {
     mHolidayItem = (RestaurantDetailItem) findViewById(R.id.detail_holiday);
     mMenuItem = (RestaurantDetailItem) findViewById(R.id.detail_menu);
     mCommentItem = (RestaurantDetailItem) findViewById(R.id.detail_comment);
-    mTabelogButton = (Button) findViewById(R.id.detail_tabelog_button);
-    mMapButton = (Button) findViewById(R.id.detail_map_button);
+    mTabelogButton = (ImageButton) findViewById(R.id.detail_tabelog_button);
+    mMapButton = (ImageButton) findViewById(R.id.detail_map_button);
 
     final SLRestaurant restaurant = (SLRestaurant) getIntent()
         .getSerializableExtra(SLRestaurant.EXTRA_RESTAURANT);

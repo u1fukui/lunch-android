@@ -10,19 +10,21 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <Button
+    <ImageButton
       android:id="@+id/detail_tabelog_button"
       android:layout_width="0dp"
-      android:layout_height="wrap_content"
+      android:layout_height="45dp"
       android:layout_weight="1"
-      android:text="食べログ"/>
+      android:src="@drawable/tabelog"
+      android:background="@color/base_color" />
 
-    <Button
+    <ImageButton
       android:id="@+id/detail_map_button"
       android:layout_width="0dp"
-      android:layout_height="wrap_content"
+      android:layout_height="45dp"
       android:layout_weight="1"
-      android:text="Map" />
+      android:src="@drawable/map"
+      android:background="@color/base_color" />
 
   </LinearLayout>
 

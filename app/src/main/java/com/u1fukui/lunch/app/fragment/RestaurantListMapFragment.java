@@ -13,7 +13,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.u1fukui.lunch.app.R;
-import com.u1fukui.lunch.app.SLApplication;
 import com.u1fukui.lunch.app.SLRestaurantManager;
 import com.u1fukui.lunch.app.model.SLRestaurant;
 

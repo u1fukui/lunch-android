@@ -21,7 +21,7 @@ import com.u1fukui.lunch.app.model.SLRestaurant;
 
 import java.util.List;
 
-public class RestaurantListMapFragment extends Fragment {
+public class RestaurantListMapFragment extends Fragment implements SLRestaurantManager.OnFilterListener {
 
   private GoogleMap mMap;
   private SupportMapFragment mMapFragment;
@@ -38,11 +38,6 @@ public class RestaurantListMapFragment extends Fragment {
 
     // 地図
     mMap = mMapFragment.getMap();
-    mMap.setMyLocationEnabled(true);
-    CameraUpdate camera =
-        CameraUpdateFactory.newLatLngZoom(
-            new LatLng(35.658517, 139.701334), 16);
-    mMap.moveCamera(camera);
     mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
       @Override
       public boolean onMarkerClick(Marker marker) {
@@ -62,6 +57,12 @@ public class RestaurantListMapFragment extends Fragment {
   }
 
   @Override
+  public void onResume() {
+    super.onResume();
+    SLRestaurantManager.getInstance().setOnFilterListener(this);
+  }
+
+  @Override
   public void onDestroyView() {
     if (mMap != null && mMapFragment.isResumed()) {
       getActivity().getSupportFragmentManager().beginTransaction()
@@ -73,13 +74,27 @@ public class RestaurantListMapFragment extends Fragment {
 
   private void setRestaurantList(List<SLRestaurant> restaurantList) {
     // 地図
-    for (SLRestaurant restaurant : restaurantList) {
+    mMap.clear();
+    int size = restaurantList.size();
+    for (int i = 0; i < size; i++) {
+      SLRestaurant r = restaurantList.get(i);
       MarkerOptions marker = new MarkerOptions();
-      marker.title(restaurant.name);
-      marker.position(new LatLng(restaurant.lat, restaurant.lng));
-      mMap.addMarker(marker);
+      marker.title(r.name);
+      marker.position(new LatLng(r.lat, r.lng));
+      Marker m = mMap.addMarker(marker);
+
+      // 初期位置
+      if (i == 0) {
+        m.showInfoWindow();
+        mMap.setMyLocationEnabled(true);
+        CameraUpdate camera =
+            CameraUpdateFactory.newLatLngZoom(
+                marker.getPosition(), 16);
+        mMap.moveCamera(camera);
+      }
     }
 
+    // 詳細情報
     mViewPager.setAdapter(new RestaurantPagerAdapter(getActivity(), restaurantList));
   }
 
@@ -92,5 +107,11 @@ public class RestaurantListMapFragment extends Fragment {
       }
     }
     return -1;
+  }
+
+  @Override
+  public void onFilter() {
+    mRestaurantList = SLRestaurantManager.getInstance().getFilteredRestaurantArray();
+    setRestaurantList(mRestaurantList);
   }
 }

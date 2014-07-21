@@ -43,12 +43,12 @@ public class RestaurantListMapFragment extends Fragment {
 
   @Override
   public void onDestroyView() {
-    super.onDestroyView();
-    if (mMap != null) {
+    if (mMap != null && mMapFragment.isResumed()) {
       getActivity().getSupportFragmentManager().beginTransaction()
           .remove(mMapFragment).commit();
       mMap = null;
     }
+    super.onDestroyView();
   }
 
   private void setRestaurantList() {

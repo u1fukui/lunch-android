@@ -9,13 +9,16 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.u1fukui.lunch.app.R;
+import com.u1fukui.lunch.app.SLApplication;
 import com.u1fukui.lunch.app.adapter.PhotoPagerAdapter;
 import com.u1fukui.lunch.app.model.SLRestaurant;
 import com.u1fukui.lunch.app.view.RestaurantDetailItem;
+import com.viewpagerindicator.CirclePageIndicator;
 
 public class RestaurantDetailActivity extends BaseActivity {
 
   private ViewPager mPager;
+  private CirclePageIndicator mPageIndicator;
   private RestaurantDetailItem mAddressItem;
   private RestaurantDetailItem mTimeItem;
   private RestaurantDetailItem mHolidayItem;
@@ -30,6 +33,7 @@ public class RestaurantDetailActivity extends BaseActivity {
     setContentView(R.layout.activity_restaurant_detail);
 
     mPager = (ViewPager) findViewById(R.id.detail_pager);
+    mPageIndicator = (CirclePageIndicator) findViewById(R.id.page_indicator);
     mAddressItem = (RestaurantDetailItem) findViewById(R.id.detail_address);
     mTimeItem = (RestaurantDetailItem) findViewById(R.id.detail_time);
     mHolidayItem = (RestaurantDetailItem) findViewById(R.id.detail_holiday);
@@ -39,6 +43,9 @@ public class RestaurantDetailActivity extends BaseActivity {
     mMapButton = (ImageButton) findViewById(R.id.detail_map_button);
 
     setViewPagerHeight(mPager);
+    mPageIndicator.setRadius(SLApplication.dipToPx(4));
+    mPageIndicator.setFillColor(getResources().getColor(R.color.theme_color));
+    mPageIndicator.setPageColor(0xffcccccc);
 
     // お店情報をセット
     final SLRestaurant restaurant = (SLRestaurant) getIntent()
@@ -47,6 +54,7 @@ public class RestaurantDetailActivity extends BaseActivity {
     PhotoPagerAdapter adapter = new PhotoPagerAdapter(this,
         restaurant.thumbnailName, restaurant.thumbnailCount);
     mPager.setAdapter(adapter);
+    mPageIndicator.setViewPager(mPager);
 
     // 地図ボタン
     mMapButton.setOnClickListener(new View.OnClickListener() {

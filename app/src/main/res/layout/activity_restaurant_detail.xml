@@ -1,62 +1,74 @@
-<LinearLayout
+<ScrollView
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:orientation="vertical"
-  android:background="#f7f3e9">
+  android:layout_height="wrap_content">
 
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:background="#f7f3e9"
+    android:orientation="vertical">
 
-    <ImageButton
-      android:id="@+id/detail_tabelog_button"
-      android:layout_width="0dp"
-      android:layout_height="45dp"
-      android:layout_weight="1"
-      android:src="@drawable/tabelog"
-      android:background="@color/base_color" />
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal">
 
-    <ImageButton
-      android:id="@+id/detail_map_button"
-      android:layout_width="0dp"
-      android:layout_height="45dp"
-      android:layout_weight="1"
-      android:src="@drawable/map"
-      android:background="@color/base_color" />
+      <ImageButton
+        android:id="@+id/detail_tabelog_button"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_weight="1"
+        android:background="@color/base_color"
+        android:src="@drawable/tabelog"/>
+
+      <ImageButton
+        android:id="@+id/detail_map_button"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_weight="1"
+        android:background="@color/base_color"
+        android:src="@drawable/map"/>
+
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+      android:id="@+id/detail_pager"
+      android:layout_width="match_parent"
+      android:layout_height="240dp"
+      android:background="#000000"/>
+
+    <com.viewpagerindicator.CirclePageIndicator
+      android:id="@+id/page_indicator"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="10dp"/>
+
+    <com.u1fukui.lunch.app.view.RestaurantDetailItem
+      android:id="@+id/detail_address"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"/>
+
+    <com.u1fukui.lunch.app.view.RestaurantDetailItem
+      android:id="@+id/detail_time"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"/>
+
+    <com.u1fukui.lunch.app.view.RestaurantDetailItem
+      android:id="@+id/detail_holiday"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"/>
+
+    <com.u1fukui.lunch.app.view.RestaurantDetailItem
+      android:id="@+id/detail_menu"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"/>
+
+    <com.u1fukui.lunch.app.view.RestaurantDetailItem
+      android:id="@+id/detail_comment"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"/>
 
   </LinearLayout>
 
-  <android.support.v4.view.ViewPager
-    android:id="@+id/detail_pager"
-    android:layout_width="match_parent"
-    android:layout_height="240dp"
-    android:background="#000000" />
-
-  <com.u1fukui.lunch.app.view.RestaurantDetailItem
-    android:id="@+id/detail_address"
-    android:layout_width="match_parent"
-    android:layout_height="50dp" />
-
-  <com.u1fukui.lunch.app.view.RestaurantDetailItem
-    android:id="@+id/detail_time"
-    android:layout_width="match_parent"
-    android:layout_height="50dp" />
-
-  <com.u1fukui.lunch.app.view.RestaurantDetailItem
-    android:id="@+id/detail_holiday"
-    android:layout_width="match_parent"
-    android:layout_height="50dp" />
-
-  <com.u1fukui.lunch.app.view.RestaurantDetailItem
-    android:id="@+id/detail_menu"
-    android:layout_width="match_parent"
-    android:layout_height="50dp" />
-
-  <com.u1fukui.lunch.app.view.RestaurantDetailItem
-    android:id="@+id/detail_comment"
-    android:layout_width="match_parent"
-    android:layout_height="50dp" />
-
-</LinearLayout>
+</ScrollView>

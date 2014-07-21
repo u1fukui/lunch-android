@@ -8,6 +8,7 @@ public class SLApplication extends Application {
 
   private static SLApplication sApplication;
   private static SLRestaurantManager sRestaurantManager;
+  private static float sDensity;
 
   @Override
   public void onCreate() {
@@ -16,6 +17,8 @@ public class SLApplication extends Application {
     sApplication = this;
     sRestaurantManager = SLRestaurantManager.getInstance();
     sRestaurantManager.loadRestaurantList(this);
+
+    sDensity = getResources().getDisplayMetrics().density;
   }
 
   @Override
@@ -32,4 +35,9 @@ public class SLApplication extends Application {
       throw new RuntimeException("Application is not attached.");
     }
   }
+
+  public static int dipToPx(int dp) {
+    return (int) (dp * sDensity);
+  }
+
 }

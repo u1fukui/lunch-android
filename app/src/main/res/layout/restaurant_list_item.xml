@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
+<merge
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
-  android:layout_height="100dp"
-  android:background="#ffffff">
+  android:layout_height="90dp">
 
   <ImageView
     android:id="@+id/restaurant_thumbnail"
-    android:layout_width="100dp"
-    android:layout_height="100dp"
+    android:layout_width="90dp"
+    android:layout_height="90dp"
     android:scaleType="centerCrop" />
 
   <TextView
@@ -53,4 +52,4 @@
     android:layout_below="@+id/restaurant_holiday"
     android:layout_marginTop="4dp" />
 
-</RelativeLayout>
+</merge>

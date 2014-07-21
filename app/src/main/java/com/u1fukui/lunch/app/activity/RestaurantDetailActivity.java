@@ -92,6 +92,7 @@ public class RestaurantDetailActivity extends BaseActivity {
     mHolidayItem.setItem("定休日", restaurant.holiday);
     mMenuItem.setItem("メニュー", restaurant.featuredMenu);
     mCommentItem.setItem("補足", restaurant.comment);
+    mCommentItem.hideDivider();
   }
 
 }

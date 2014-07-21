@@ -1,11 +1,13 @@
 package com.u1fukui.lunch.app.fragment;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.u1fukui.lunch.app.R;
 import com.u1fukui.lunch.app.SLRestaurantManager;
 import com.u1fukui.lunch.app.activity.RestaurantDetailActivity;
 import com.u1fukui.lunch.app.adapter.RestaurantListAdapter;
@@ -25,6 +27,8 @@ public class RestaurantListFragment extends ListFragment
         SLRestaurantManager.getInstance().getFilteredRestaurantArray());
     setListAdapter(mListAdapter);
     getListView().setOnItemClickListener(this);
+    getListView().setDivider(new ColorDrawable(getResources().getColor(R.color.theme_color)));
+    getListView().setDividerHeight(1);
     setListShown(true);
   }
 

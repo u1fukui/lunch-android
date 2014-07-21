@@ -29,4 +29,22 @@
     android:textColor="#000000"
     android:textSize="13dp" />
 
+  <View
+    android:id="@+id/detail_item_bottom_divider1"
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_alignLeft="@+id/detail_item_title"
+    android:layout_alignRight="@+id/detail_item_title"
+    android:layout_alignParentBottom="true"
+    android:background="#ffffff" />
+
+  <View
+    android:id="@+id/detail_item_bottom_divider2"
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_alignLeft="@+id/detail_item_description"
+    android:layout_alignRight="@+id/detail_item_description"
+    android:layout_alignParentBottom="true"
+    android:background="@color/theme_color" />
+
 </merge>

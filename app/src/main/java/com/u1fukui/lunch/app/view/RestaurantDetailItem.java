@@ -12,6 +12,8 @@ public class RestaurantDetailItem extends RelativeLayout {
 
   private TextView mTitleView;
   private TextView mDescriptionView;
+  private View mDivider1;
+  private View mDivider2;
 
   public RestaurantDetailItem(Context context) {
     this(context, null);
@@ -27,10 +29,22 @@ public class RestaurantDetailItem extends RelativeLayout {
     View root = View.inflate(context, R.layout.restaurant_detail_item, this);
     mTitleView = (TextView) root.findViewById(R.id.detail_item_title);
     mDescriptionView = (TextView) root.findViewById(R.id.detail_item_description);
+    mDivider1 = root.findViewById(R.id.detail_item_bottom_divider1);
+    mDivider2 = root.findViewById(R.id.detail_item_bottom_divider2);
   }
 
   public void setItem(String title, String description) {
     mTitleView.setText(title);
     mDescriptionView.setText(description);
+  }
+
+  public void hideDivider() {
+    mDivider1.setVisibility(View.GONE);
+    mDivider2.setVisibility(View.GONE);
+  }
+
+  public void showDivider() {
+    mDivider1.setVisibility(View.VISIBLE);
+    mDivider2.setVisibility(View.VISIBLE);
   }
 }

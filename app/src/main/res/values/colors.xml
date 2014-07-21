@@ -2,4 +2,5 @@
 <resources>
   <color name="theme_color">#ed1c24</color>
   <color name="base_color">#f7f3e9</color>
+  <color name="text_color">#333333</color>
 </resources>

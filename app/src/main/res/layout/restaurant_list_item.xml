@@ -9,47 +9,82 @@
     android:id="@+id/restaurant_thumbnail"
     android:layout_width="90dp"
     android:layout_height="90dp"
-    android:scaleType="centerCrop" />
+    android:scaleType="centerCrop"/>
 
   <TextView
-    style="@style/RestaurantListItemText"
     android:id="@+id/restaurant_name"
+    style="@style/RestaurantListItemText"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_toRightOf="@id/restaurant_thumbnail"
     android:layout_marginLeft="10dp"
-    android:layout_marginTop="10dp"
     android:layout_marginRight="10dp"
-    android:textStyle="bold" />
+    android:layout_marginTop="10dp"
+    android:layout_toRightOf="@id/restaurant_thumbnail"
+    android:textStyle="bold"/>
 
-  <TextView
-    style="@style/RestaurantListItemText"
-    android:id="@+id/restaurant_time"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+  <!-- ランチタイム -->
+  <ImageView
+    android:id="@+id/restaurant_time_icon"
+    android:layout_width="15dp"
+    android:layout_height="15dp"
     android:layout_alignLeft="@+id/restaurant_name"
-    android:layout_alignRight="@+id/restaurant_name"
     android:layout_below="@+id/restaurant_name"
-    android:layout_marginTop="5dp" />
+    android:layout_marginTop="5dp"
+    android:src="@drawable/clock_icon"/>
 
   <TextView
+    android:id="@+id/restaurant_time"
     style="@style/RestaurantListItemText"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignRight="@+id/restaurant_name"
+    android:layout_alignTop="@+id/restaurant_time_icon"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="1dp"
+    android:layout_toRightOf="@+id/restaurant_time_icon"/>
+
+
+  <!-- 定休日 -->
+  <ImageView
+    android:id="@+id/restaurant_holiday_icon"
+    android:layout_width="15dp"
+    android:layout_height="15dp"
+    android:layout_alignLeft="@+id/restaurant_time_icon"
+    android:layout_below="@+id/restaurant_time_icon"
+    android:layout_marginTop="5dp"
+    android:src="@drawable/holiday_icon"/>
+
+  <TextView
     android:id="@+id/restaurant_holiday"
+    style="@style/RestaurantListItemText"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_alignLeft="@+id/restaurant_name"
     android:layout_alignRight="@+id/restaurant_name"
-    android:layout_below="@+id/restaurant_time"
-    android:layout_marginTop="4dp" />
+    android:layout_alignTop="@+id/restaurant_holiday_icon"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="1dp"
+    android:layout_toRightOf="@+id/restaurant_holiday_icon"/>
+
+
+  <!-- メニュー -->
+  <ImageView
+    android:id="@+id/restaurant_menu_icon"
+    android:layout_width="15dp"
+    android:layout_height="15dp"
+    android:layout_alignLeft="@+id/restaurant_holiday_icon"
+    android:layout_below="@+id/restaurant_holiday_icon"
+    android:layout_marginTop="5dp"
+    android:src="@drawable/menu_icon"/>
 
   <TextView
-    style="@style/RestaurantListItemText"
     android:id="@+id/restaurant_menu"
+    style="@style/RestaurantListItemText"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_alignLeft="@+id/restaurant_name"
     android:layout_alignRight="@+id/restaurant_name"
-    android:layout_below="@+id/restaurant_holiday"
-    android:layout_marginTop="4dp" />
+    android:layout_alignTop="@+id/restaurant_menu_icon"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="1dp"
+    android:layout_toRightOf="@+id/restaurant_menu_icon"/>
 
 </merge>

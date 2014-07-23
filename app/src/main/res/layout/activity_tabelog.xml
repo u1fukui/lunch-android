@@ -20,4 +20,6 @@
       android:visibility="gone" />
   </FrameLayout>
 
+  <include layout="@layout/nend_ad_view"/>
+
 </LinearLayout>

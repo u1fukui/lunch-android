@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.u1fukui.lunch.app.model.SLRestaurant;
-import com.u1fukui.lunch.app.view.RestaurantListItem;
+import com.u1fukui.lunch.app.view.RestaurantSlideItem;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class RestaurantPagerAdapter extends PagerAdapter {
 
   @Override
   public Object instantiateItem(ViewGroup container, int position) {
-    RestaurantListItem itemView = new RestaurantListItem(mContext);
+    RestaurantSlideItem itemView = new RestaurantSlideItem(mContext);
     itemView.setRestaurant(mItemList.get(position));
     container.addView(itemView);
     return itemView;

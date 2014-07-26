@@ -1,6 +1,7 @@
 package com.u1fukui.lunch.app.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.AttributeSet;
@@ -12,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.u1fukui.lunch.app.R;
+import com.u1fukui.lunch.app.activity.RestaurantDetailActivity;
 import com.u1fukui.lunch.app.model.SLRestaurant;
 
 import java.io.IOException;
@@ -50,12 +52,21 @@ public class RestaurantListItem extends RelativeLayout {
     mMenuView = (TextView) rootView.findViewById(R.id.restaurant_menu);
   }
 
-  public void setRestaurant(SLRestaurant restaurant) {
+  public void setRestaurant(final SLRestaurant restaurant) {
     mNameView.setText(restaurant.name);
     mTimeView.setText(restaurant.getLunchTimeString());
     mHolidayView.setText(restaurant.holiday);
     mMenuView.setText(restaurant.featuredMenu);
     mThumbnailView.setImageBitmap(getThumbnailBitmap(restaurant.thumbnailName));
+
+    setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = new Intent(mContext, RestaurantDetailActivity.class);
+        intent.putExtra(SLRestaurant.EXTRA_RESTAURANT, restaurant);
+        mContext.startActivity(intent);
+      }
+    });
   }
 
   private Bitmap getThumbnailBitmap(String thumbnailName) {

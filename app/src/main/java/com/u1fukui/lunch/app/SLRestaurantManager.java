@@ -1,6 +1,7 @@
 package com.u1fukui.lunch.app;
 
 import android.content.Context;
+import android.location.Location;
 
 import com.u1fukui.lunch.app.model.SLRestaurant;
 
@@ -9,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class SLRestaurantManager {
 
@@ -18,15 +20,16 @@ public class SLRestaurantManager {
 
   private static SLRestaurantManager sInstance;
 
-  private ArrayList<SLRestaurant> mRestaurantArray;
-  private ArrayList<SLRestaurant> mFilteredRestaurantArray;
+  private ArrayList<SLRestaurant> mRestaurantList;
+  private ArrayList<SLRestaurant> mFilteredRestaurantList;
   private OnFilterListener mFilterListener;
 
   /** HH:mm */
   private String mFilterTime;
+  private Location mCurrentLocation;
 
   private SLRestaurantManager() {
-    mRestaurantArray = new ArrayList<SLRestaurant>();
+    mRestaurantList = new ArrayList<SLRestaurant>();
   }
 
   public static SLRestaurantManager getInstance() {
@@ -59,7 +62,7 @@ public class SLRestaurantManager {
           r.comment = array[10];
           r.thumbnailName = array[11];
           r.thumbnailCount = Integer.parseInt(array[12]);
-          mRestaurantArray.add(r);
+          mRestaurantList.add(r);
         }
       } catch (IOException ex) {
         ex.printStackTrace();
@@ -86,16 +89,19 @@ public class SLRestaurantManager {
   }
 
   public ArrayList<SLRestaurant> getFilteredRestaurantArray() {
-    if (mFilteredRestaurantArray != null) {
-      return mFilteredRestaurantArray;
+    if (mFilteredRestaurantList != null) {
+      return mFilteredRestaurantList;
     }
-    return mRestaurantArray;
+    return mRestaurantList;
   }
 
   public void setOnFilterListener(OnFilterListener listener) {
     mFilterListener = listener;
   }
 
+  public void setCurrentLocaton(Location location) {
+    mCurrentLocation = location;
+  }
 
   //================================================================================
   // filter
@@ -103,10 +109,10 @@ public class SLRestaurantManager {
 
   public void filter(String filterTime) {
     mFilterTime = filterTime;
-    mFilteredRestaurantArray = new ArrayList<SLRestaurant>();
-    for (SLRestaurant r : mRestaurantArray) {
+    mFilteredRestaurantList = new ArrayList<SLRestaurant>();
+    for (SLRestaurant r : mRestaurantList) {
       if (isFilterRange(mFilterTime, r)) {
-        mFilteredRestaurantArray.add(r);
+        mFilteredRestaurantList.add(r);
       }
     }
 
@@ -130,5 +136,28 @@ public class SLRestaurantManager {
   private int integerFromTimeString(String filterTime) {
     String[] array = filterTime.split(":");
     return Integer.parseInt(array[0] + array[1]);
+  }
+
+  public void sortInOrderOfDistace() {
+    if (mCurrentLocation == null) {
+      return;
+    }
+
+    if (mFilteredRestaurantList == null) {
+      mFilteredRestaurantList = mRestaurantList;
+    }
+
+    TreeMap<Float, SLRestaurant> map = new TreeMap<Float, SLRestaurant>();
+    for (SLRestaurant r : mFilteredRestaurantList) {
+      float[] results = new float[1];
+      Location.distanceBetween(mCurrentLocation.getLatitude(),
+          mCurrentLocation.getLongitude(), r.lat, r.lng, results);
+      map.put(Float.valueOf(results[0]), r);
+    }
+
+    mFilteredRestaurantList = new ArrayList<SLRestaurant>();
+    for (SLRestaurant r : map.values()) {
+      mFilteredRestaurantList.add(r);
+    }
   }
 }

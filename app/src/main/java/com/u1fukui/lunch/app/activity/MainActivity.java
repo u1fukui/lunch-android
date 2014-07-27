@@ -89,6 +89,7 @@ public class MainActivity extends BaseActivity {
               manager.filter(null);
             } else {
               manager.filter(items[which]);
+              manager.sortInOrderOfDistace();
               mFilterDescriptionView.setText(manager.getFilterTime() + "に営業しているお店を表示");
             }
           }

@@ -4,8 +4,6 @@ import android.app.Application;
 
 public class SLApplication extends Application {
 
-  private static final String TAG = SLApplication.class.getSimpleName();
-
   private static SLApplication sApplication;
   private static SLRestaurantManager sRestaurantManager;
   private static float sDensity;

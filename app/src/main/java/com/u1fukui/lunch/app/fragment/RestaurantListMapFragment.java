@@ -17,13 +17,14 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.u1fukui.lunch.app.R;
 import com.u1fukui.lunch.app.SLRestaurantManager;
+import com.u1fukui.lunch.app.activity.MainActivity;
 import com.u1fukui.lunch.app.adapter.RestaurantPagerAdapter;
 import com.u1fukui.lunch.app.model.SLRestaurant;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RestaurantListMapFragment extends Fragment implements SLRestaurantManager.OnFilterListener {
+public class RestaurantListMapFragment extends Fragment implements MainActivity.OnFilterListener {
 
   private GoogleMap mMap;
   private SupportMapFragment mMapFragment;
@@ -31,11 +32,18 @@ public class RestaurantListMapFragment extends Fragment implements SLRestaurantM
   private ImageButton mSlideLeftButton;
   private ImageButton mSlideRightButton;
 
+  private MainActivity mActivity;
   private RestaurantPagerAdapter mPagerAdapter;
   private List<SLRestaurant> mRestaurantList;
   private List<Marker> mMarkerList;
   private boolean mIsTappedMarker = false;
   private int mCurrentIndex;
+
+  @Override
+  public void onActivityCreated(Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
+    mActivity = (MainActivity) getActivity();
+  }
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -125,7 +133,7 @@ public class RestaurantListMapFragment extends Fragment implements SLRestaurantM
   @Override
   public void onResume() {
     super.onResume();
-    SLRestaurantManager.getInstance().setOnFilterListener(this);
+    mActivity.setOnFilterListener(this);
   }
 
   @Override

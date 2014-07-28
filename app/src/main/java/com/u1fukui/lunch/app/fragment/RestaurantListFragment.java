@@ -15,16 +15,24 @@ import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.location.LocationClient;
 import com.u1fukui.lunch.app.R;
 import com.u1fukui.lunch.app.SLRestaurantManager;
+import com.u1fukui.lunch.app.activity.MainActivity;
 import com.u1fukui.lunch.app.adapter.RestaurantListAdapter;
 
 public class RestaurantListFragment extends Fragment
-    implements SLRestaurantManager.OnFilterListener, SwipeRefreshLayout.OnRefreshListener {
+    implements MainActivity.OnFilterListener, SwipeRefreshLayout.OnRefreshListener {
 
   private ListView mListView;
   private SwipeRefreshLayout mSwipeRefresh;
 
+  private MainActivity mActivity;
   private RestaurantListAdapter mListAdapter;
   private LocationClient mLocationClient;
+
+  @Override
+  public void onActivityCreated(Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
+    mActivity = (MainActivity) getActivity();
+  }
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,7 +64,7 @@ public class RestaurantListFragment extends Fragment
   @Override
   public void onResume() {
     super.onResume();
-    SLRestaurantManager.getInstance().setOnFilterListener(this);
+    mActivity.setOnFilterListener(this);
   }
 
   @Override
@@ -75,6 +83,7 @@ public class RestaurantListFragment extends Fragment
 
     SLRestaurantManager.getInstance().setCurrentLocaton(location);
     SLRestaurantManager.getInstance().sortInOrderOfDistace();
+    mActivity.setFilterDescriotion();
     mListAdapter.clear();
     mListAdapter.addAll(SLRestaurantManager.getInstance().getFilteredRestaurantArray());
     mSwipeRefresh.setRefreshing(false);

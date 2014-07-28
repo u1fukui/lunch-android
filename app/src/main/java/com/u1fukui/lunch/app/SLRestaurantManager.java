@@ -14,18 +14,15 @@ import java.util.TreeMap;
 
 public class SLRestaurantManager {
 
-  public interface OnFilterListener {
-    public void onFilter();
-  }
-
   private static SLRestaurantManager sInstance;
 
   private ArrayList<SLRestaurant> mRestaurantList;
   private ArrayList<SLRestaurant> mFilteredRestaurantList;
-  private OnFilterListener mFilterListener;
 
   /** HH:mm */
   private String mFilterTime;
+
+  /** 現在地 */
   private Location mCurrentLocation;
 
   private SLRestaurantManager() {
@@ -90,18 +87,19 @@ public class SLRestaurantManager {
 
   public ArrayList<SLRestaurant> getFilteredRestaurantArray() {
     if (mFilteredRestaurantList != null) {
-      return mFilteredRestaurantList;
+      return (ArrayList<SLRestaurant>) mFilteredRestaurantList.clone();
     }
-    return mRestaurantList;
-  }
-
-  public void setOnFilterListener(OnFilterListener listener) {
-    mFilterListener = listener;
+    return (ArrayList<SLRestaurant>) mRestaurantList.clone();
   }
 
   public void setCurrentLocaton(Location location) {
     mCurrentLocation = location;
   }
+
+  public Location getCurrentLocation() {
+    return mCurrentLocation;
+  }
+
 
   //================================================================================
   // filter
@@ -114,10 +112,6 @@ public class SLRestaurantManager {
       if (isFilterRange(mFilterTime, r)) {
         mFilteredRestaurantList.add(r);
       }
-    }
-
-    if (mFilterListener != null) {
-      mFilterListener.onFilter();
     }
   }
 

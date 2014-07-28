@@ -2,6 +2,7 @@ package com.u1fukui.lunch.app.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.view.Menu;
@@ -17,6 +18,10 @@ import com.u1fukui.lunch.app.fragment.RestaurantListFragment;
 
 public class MainActivity extends BaseActivity {
 
+  public interface OnFilterListener {
+    public void onFilter();
+  }
+
   private static final int MENU_FILTER  = 1;
   private static final int MENU_MAIL    = 2;
 
@@ -25,6 +30,8 @@ public class MainActivity extends BaseActivity {
 
   private FragmentTabHost mTabHost;
   private TextView mFilterDescriptionView;
+
+  private OnFilterListener mFilterListener;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -87,13 +94,42 @@ public class MainActivity extends BaseActivity {
             SLRestaurantManager manager = SLRestaurantManager.getInstance();
             if (which == 0) {
               manager.filter(null);
+              manager.sortInOrderOfDistace();
+              setFilterDescriotion();
             } else {
               manager.filter(items[which]);
               manager.sortInOrderOfDistace();
-              mFilterDescriptionView.setText(manager.getFilterTime() + "に営業しているお店を表示");
+              setFilterDescriotion();
+            }
+            if (mFilterListener != null) {
+              mFilterListener.onFilter();
             }
           }
         })
         .show();
   }
+
+  public void setFilterDescriotion() {
+    StringBuilder sb = new StringBuilder();
+
+    String filterTime = SLRestaurantManager.getInstance().getFilterTime();
+    if (filterTime != null) {
+      sb.append(filterTime).append("に営業しているお店を");
+    } else {
+      sb.append("全てのお店を");
+    }
+
+    Location location = SLRestaurantManager.getInstance().getCurrentLocation();
+    if (location != null) {
+      sb.append("近い順に");
+    }
+    sb.append("表示");
+
+    mFilterDescriptionView.setText(sb.toString());
+  }
+
+  public void setOnFilterListener(OnFilterListener listener) {
+    mFilterListener = listener;
+  }
+
 }

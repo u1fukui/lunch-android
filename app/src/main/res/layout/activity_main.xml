@@ -10,7 +10,7 @@
     android:layout_height="30dp"
     android:gravity="center"
     android:text="すべてのお店を表示"
-    android:textSize="14dp"
+    android:textSize="12dp"
     android:textColor="#ffffff"
     android:background="#333333" />
 
@@ -33,6 +33,11 @@
         android:layout_weight="0"
         android:orientation="horizontal"
         android:background="@color/base_color" />
+
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@drawable/shadow_btm" />
 
       <FrameLayout
         android:id="@android:id/tabcontent"

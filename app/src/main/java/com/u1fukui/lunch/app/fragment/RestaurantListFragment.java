@@ -50,8 +50,6 @@ public class RestaurantListFragment extends Fragment
     mListAdapter = new RestaurantListAdapter(getActivity(),
         SLRestaurantManager.getInstance().getFilteredRestaurantArray());
     mListView.setAdapter(mListAdapter);
-    mListView.setDivider(new ColorDrawable(getResources().getColor(R.color.theme_color)));
-    mListView.setDividerHeight(1);
 
     // pull to refresh
     mSwipeRefresh.setColorScheme(R.color.theme_color,

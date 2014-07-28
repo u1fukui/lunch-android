@@ -106,15 +106,7 @@ public class RestaurantListMapFragment extends Fragment implements MainActivity.
         } else {
           selectMarker(mMarkerList.get(position));
         }
-
-        // 左右のボタン
-        mSlideLeftButton.setVisibility(View.VISIBLE);
-        mSlideRightButton.setVisibility(View.VISIBLE);
-        if (position == 0) {
-          mSlideLeftButton.setVisibility(View.INVISIBLE);
-        } else if (position == mPagerAdapter.getCount() - 1) {
-          mSlideRightButton.setVisibility(View.INVISIBLE);
-        }
+        setSlideButton(position);
       }
 
       @Override
@@ -146,6 +138,26 @@ public class RestaurantListMapFragment extends Fragment implements MainActivity.
     super.onDestroyView();
   }
 
+  private int findPositionByName(String name) {
+    int size = mRestaurantList.size();
+    for (int i = 0; i < size; i++) {
+      SLRestaurant r = mRestaurantList.get(i);
+      if (r.name.equals(name)) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  private void selectMarker(Marker marker) {
+    marker.showInfoWindow();
+    mMap.setMyLocationEnabled(true);
+    CameraUpdate camera =
+        CameraUpdateFactory.newLatLngZoom(
+            marker.getPosition(), 16);
+    mMap.moveCamera(camera);
+  }
+
   private void setRestaurantList(List<SLRestaurant> restaurantList) {
     // 地図
     mMap.clear();
@@ -168,26 +180,17 @@ public class RestaurantListMapFragment extends Fragment implements MainActivity.
     // 詳細情報
     mPagerAdapter = new RestaurantPagerAdapter(getActivity(), restaurantList);
     mViewPager.setAdapter(mPagerAdapter);
+    setSlideButton(0);
   }
 
-  private int findPositionByName(String name) {
-    int size = mRestaurantList.size();
-    for (int i = 0; i < size; i++) {
-      SLRestaurant r = mRestaurantList.get(i);
-      if (r.name.equals(name)) {
-        return i;
-      }
+  private void setSlideButton(int position) {
+    mSlideLeftButton.setVisibility(View.VISIBLE);
+    mSlideRightButton.setVisibility(View.VISIBLE);
+    if (position == 0) {
+      mSlideLeftButton.setVisibility(View.INVISIBLE);
+    } else if (position == mPagerAdapter.getCount() - 1) {
+      mSlideRightButton.setVisibility(View.INVISIBLE);
     }
-    return -1;
-  }
-
-  private void selectMarker(Marker marker) {
-    marker.showInfoWindow();
-    mMap.setMyLocationEnabled(true);
-    CameraUpdate camera =
-        CameraUpdateFactory.newLatLngZoom(
-            marker.getPosition(), 16);
-    mMap.moveCamera(camera);
   }
 
     

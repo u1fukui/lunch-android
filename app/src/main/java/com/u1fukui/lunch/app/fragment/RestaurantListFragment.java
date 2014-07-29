@@ -1,6 +1,5 @@
 package com.u1fukui.lunch.app.fragment;
 
-import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

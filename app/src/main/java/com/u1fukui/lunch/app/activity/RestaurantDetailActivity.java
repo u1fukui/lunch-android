@@ -1,10 +1,15 @@
 package com.u1fukui.lunch.app.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.Display;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -26,6 +31,8 @@ public class RestaurantDetailActivity extends BaseActivity {
   private RestaurantDetailItem mCommentItem;
   private ImageButton mTabelogButton;
   private ImageButton mMapButton;
+
+  private SLRestaurant mRestaurant;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +86,42 @@ public class RestaurantDetailActivity extends BaseActivity {
     });
   }
 
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    MenuItem filterItem = menu.add(Menu.NONE, 0, Menu.NONE, null);
+    filterItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+    filterItem.setIcon(R.drawable.share);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+    alertDialogBuilder.setMessage("お店情報を友達に教える");
+    alertDialogBuilder.setPositiveButton("メールする",
+        new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:"));
+            intent.putExtra(Intent.EXTRA_TEXT, mRestaurant.name + "\n" + mRestaurant.tabelogUrl);
+            startActivity(intent);
+          }
+        }
+    );
+    alertDialogBuilder.setNegativeButton("キャンセル",
+        new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+          }
+        }
+    );
+    alertDialogBuilder.setCancelable(true);
+    alertDialogBuilder.create().show();
+    return true;
+  }
+
   private void setViewPagerHeight(ViewPager pager) {
     Display display = getWindowManager().getDefaultDisplay();
     Point size = new Point();
@@ -87,6 +130,8 @@ public class RestaurantDetailActivity extends BaseActivity {
   }
 
   private void showRestaurant(SLRestaurant restaurant) {
+    mRestaurant = restaurant;
+
     mAddressItem.setItem("住所", restaurant.address);
     mTimeItem.setItem("ランチ\nタイム", restaurant.getLunchTimeString());
     mHolidayItem.setItem("定休日", restaurant.holiday);

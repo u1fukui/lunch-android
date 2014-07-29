@@ -2,7 +2,9 @@ package com.u1fukui.lunch.app.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.view.Menu;
@@ -79,9 +81,14 @@ public class MainActivity extends BaseActivity {
         showTimeFilterDialog();
         return true;
       case MENU_MAIL:
+        showMailConfirmDialog();
         return true;
     }
     return super.onOptionsItemSelected(item);
+  }
+
+  public void setOnFilterListener(OnFilterListener listener) {
+    mFilterListener = listener;
   }
 
   private void showTimeFilterDialog() {
@@ -128,8 +135,30 @@ public class MainActivity extends BaseActivity {
     mFilterDescriptionView.setText(sb.toString());
   }
 
-  public void setOnFilterListener(OnFilterListener listener) {
-    mFilterListener = listener;
+  private void showMailConfirmDialog() {
+    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+    alertDialogBuilder.setTitle("開発者に教える");
+    alertDialogBuilder.setMessage("情報の間違いや、他にオススメのお店の情報などあれば教えて下さいm(_ _)m");
+    alertDialogBuilder.setPositiveButton("メールする",
+        new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:u1fukuicom+lunch@gmail.com"));
+            intent.putExtra(Intent.EXTRA_SUBJECT, "渋谷500円ランチ");
+            startActivity(intent);
+          }
+        }
+    );
+    alertDialogBuilder.setNegativeButton("キャンセル",
+        new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+          }
+        }
+    );
+    alertDialogBuilder.setCancelable(true);
+    alertDialogBuilder.create().show();
   }
-
 }

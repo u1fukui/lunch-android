@@ -2,6 +2,7 @@ package com.u1fukui.lunch.app.activity;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -9,7 +10,7 @@ import android.widget.ProgressBar;
 
 import com.u1fukui.lunch.app.R;
 
-public class TabelogActivity extends BaseActivity {
+public class TabelogActivity extends FragmentActivity {
 
   public static final String EXTRA_URL = "tabelog_url";
 
@@ -19,6 +20,7 @@ public class TabelogActivity extends BaseActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_tabelog);
+    getActionBar().setTitle("食べログ");
 
     WebView webView = (WebView) findViewById(R.id.webview);
     mProgressBar = (ProgressBar) findViewById(R.id.progress);

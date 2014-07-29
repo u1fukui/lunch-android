@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,7 +19,7 @@ import com.u1fukui.lunch.app.SLRestaurantManager;
 import com.u1fukui.lunch.app.fragment.RestaurantListMapFragment;
 import com.u1fukui.lunch.app.fragment.RestaurantListFragment;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends FragmentActivity {
 
   public interface OnFilterListener {
     public void onFilter();

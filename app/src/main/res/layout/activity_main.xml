@@ -32,11 +32,12 @@
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:orientation="horizontal"
-        android:background="@color/base_color" />
+        android:background="@color/base_color"
+        android:showDividers="none"/>
 
       <View
         android:layout_width="match_parent"
-        android:layout_height="1px"
+        android:layout_height="1dp"
         android:background="@drawable/shadow_btm" />
 
       <FrameLayout

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Display;
 import android.view.Menu;
@@ -20,7 +21,7 @@ import com.u1fukui.lunch.app.model.SLRestaurant;
 import com.u1fukui.lunch.app.view.RestaurantDetailItem;
 import com.viewpagerindicator.CirclePageIndicator;
 
-public class RestaurantDetailActivity extends BaseActivity {
+public class RestaurantDetailActivity extends FragmentActivity {
 
   private ViewPager mPager;
   private CirclePageIndicator mPageIndicator;
@@ -132,6 +133,7 @@ public class RestaurantDetailActivity extends BaseActivity {
   private void showRestaurant(SLRestaurant restaurant) {
     mRestaurant = restaurant;
 
+    getActionBar().setTitle(restaurant.name);
     mAddressItem.setItem("住所", restaurant.address);
     mTimeItem.setItem("ランチ\nタイム", restaurant.getLunchTimeString());
     mHolidayItem.setItem("定休日", restaurant.holiday);

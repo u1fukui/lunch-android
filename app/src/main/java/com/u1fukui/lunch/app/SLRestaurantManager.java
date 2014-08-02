@@ -138,7 +138,7 @@ public class SLRestaurantManager {
     }
 
     if (mFilteredRestaurantList == null) {
-      mFilteredRestaurantList = mRestaurantList;
+      mFilteredRestaurantList = (ArrayList<SLRestaurant>) mRestaurantList.clone();
     }
 
     TreeMap<Float, SLRestaurant> map = new TreeMap<Float, SLRestaurant>();
@@ -146,7 +146,13 @@ public class SLRestaurantManager {
       float[] results = new float[1];
       Location.distanceBetween(mCurrentLocation.getLatitude(),
           mCurrentLocation.getLongitude(), r.lat, r.lng, results);
-      map.put(Float.valueOf(results[0]), r);
+
+      Float distance = Float.valueOf(results[0]);
+      if (map.containsKey(distance)) {
+        distance += 0.001f;  // とりあえず
+      }
+
+      map.put(distance, r);
     }
 
     mFilteredRestaurantList = new ArrayList<SLRestaurant>();

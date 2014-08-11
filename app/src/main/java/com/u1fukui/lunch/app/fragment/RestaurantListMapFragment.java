@@ -154,7 +154,7 @@ public class RestaurantListMapFragment extends Fragment implements MainActivity.
     mMap.setMyLocationEnabled(true);
     CameraUpdate camera =
         CameraUpdateFactory.newLatLngZoom(
-            marker.getPosition(), 16);
+            marker.getPosition(), 15);
     mMap.moveCamera(camera);
   }
 

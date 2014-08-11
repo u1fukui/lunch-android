@@ -70,16 +70,24 @@ public class RestaurantListItem extends RelativeLayout {
   }
 
   private Bitmap getThumbnailBitmap(String thumbnailName) {
+    Bitmap bm = null;
+    InputStream is = null;
     try {
       String path = "thumbnails/" + thumbnailName + "1@2x.jpg";
-      InputStream is = mContext.getAssets().open(path);
-      if (is != null) {
-        return BitmapFactory.decodeStream(is);
-      }
+      is = mContext.getAssets().open(path);
+      bm = BitmapFactory.decodeStream(is);
     } catch (IOException e) {
-      Log.e("TAG", "IOException", e);
+      Log.e("TAG", "InputStream close IOException", e);
+    } finally {
+      if (is != null) {
+        try {
+          is.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
     }
-    return null;
+    return bm;
   }
 
 }

@@ -1,21 +1,15 @@
 package com.u1fukui.lunch.app.adapter;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.provider.ContactsContract;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 public class PhotoPagerAdapter extends PagerAdapter {
 
@@ -31,9 +25,10 @@ public class PhotoPagerAdapter extends PagerAdapter {
 
   @Override
   public Object instantiateItem(ViewGroup container, int position) {
+    InputStream is = null;
     try {
       String path = "thumbnails/" + mFileName + Integer.toString(position + 1) + "@2x.jpg";
-      InputStream is = mContext.getAssets().open(path);
+      is = mContext.getAssets().open(path);
       if (is != null) {
         ImageView photoView = new ImageView(mContext);
         photoView.setImageBitmap(BitmapFactory.decodeStream(is));
@@ -42,6 +37,14 @@ public class PhotoPagerAdapter extends PagerAdapter {
       }
     } catch (IOException e) {
       Log.e("TAG", "IOException", e);
+    } finally {
+      if (is != null) {
+        try {
+          is.close();
+        } catch (IOException e) {
+          Log.e("TAG", "InputStream close IOException", e);
+        }
+      }
     }
     return null;
   }

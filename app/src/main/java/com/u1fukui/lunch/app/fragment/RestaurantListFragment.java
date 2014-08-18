@@ -35,11 +35,6 @@ public class RestaurantListFragment extends Fragment
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    if (mLocationClient == null) {
-      mLocationClient = new LocationClient(getActivity(), mConnectionCallbacks, mOnConnectionFailedListener);
-    }
-    mLocationClient.connect();
-
     // View
     View rootView = inflater.inflate(R.layout.fragment_restaurant_list, container, false);
     mListView = (ListView) rootView.findViewById(R.id.list);
@@ -62,6 +57,21 @@ public class RestaurantListFragment extends Fragment
   public void onResume() {
     super.onResume();
     mActivity.setOnFilterListener(this);
+  }
+
+  @Override
+  public void onStart() {
+    super.onStart();
+    if (mLocationClient == null) {
+      mLocationClient = new LocationClient(getActivity(), mConnectionCallbacks, mOnConnectionFailedListener);
+    }
+    mLocationClient.connect();
+  }
+
+  @Override
+  public void onStop() {
+    super.onStop();
+    mLocationClient.disconnect();
   }
 
   @Override
